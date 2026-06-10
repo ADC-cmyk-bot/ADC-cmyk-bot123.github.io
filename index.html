@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI学术公平 | 学术海报</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#7c3aed',
+                        accent: '#059669',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.8s ease-out forwards'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(50px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(50px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .bg-blur {
+                backdrop-filter: blur(8px);
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+        
+        body {
+            scroll-behavior: smooth;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-white/80 bg-blur shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#hero" class="flex items-center space-x-2">
+                <i class="fa fa-balance-scale text-primary text-2xl"></i>
+                <span class="font-bold text-xl text-primary">AI学术公平</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="hover:text-primary transition-colors">概述</a>
+                <a href="#challenges" class="hover:text-primary transition-colors">挑战</a>
+                <a href="#data" class="hover:text-primary transition-colors">数据</a>
+                <a href="#solutions" class="hover:text-primary transition-colors">解决方案</a>
+                <a href="#future" class="hover:text-primary transition-colors">未来展望</a>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-dark text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#overview" class="hover:text-primary transition-colors py-2">概述</a>
+                <a href="#challenges" class="hover:text-primary transition-colors py-2">挑战</a>
+                <a href="#data" class="hover:text-primary transition-colors py-2">数据</a>
+                <a href="#solutions" class="hover:text-primary transition-colors py-2">解决方案</a>
+                <a href="#future" class="hover:text-primary transition-colors py-2">未来展望</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-primary/90 to-secondary/90 text-white">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-20 left-10 w-64 h-64 rounded-full bg-white/20 animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-white/20 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/10 animate-pulse-slow"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 py-20 text-center relative z-10">
+            <h1 class="text-[clamp(2.5rem,6vw,5rem)] font-bold mb-6 animate-slide-up">
+                AI与学术公平
+            </h1>
+            <p class="text-[clamp(1.2rem,3vw,1.8rem)] mb-12 max-w-3xl mx-auto opacity-90 animate-slide-up" style="animation-delay: 0.2s;">
+                探索人工智能时代学术研究的机遇、挑战与伦理边界
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-slide-up" style="animation-delay: 0.4s;">
+                <a href="#overview" class="bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition-colors shadow-lg">
+                    开始探索 <i class="fa fa-arrow-down ml-2"></i>
+                </a>
+                <button id="play-audio" class="bg-transparent border-2 border-white text-white font-bold py-3 px-8 rounded-full hover:bg-white/10 transition-colors flex items-center justify-center">
+                    <i class="fa fa-play mr-2"></i> 语音介绍
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#overview" class="text-white text-2xl">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 概述部分 -->
+    <section id="overview" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-gradient bg-gradient-to-r from-primary to-secondary">
+                    什么是AI学术公平？
+                </h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-in-left">
+                    <p class="text-lg mb-6 leading-relaxed">
+                        AI学术公平是指在人工智能技术日益融入学术研究的背景下，确保所有研究者无论其背景、资源或技术能力如何，都能公平地参与学术活动、获取研究资源并获得公正评价的原则。
+                    </p>
+                    <p class="text-lg mb-6 leading-relaxed">
+                        随着ChatGPT、Claude等大型语言模型的普及，AI已经成为学术研究中不可或缺的工具。然而，这种技术进步也带来了一系列公平性问题，从资源获取的不平等到学术诚信的挑战。
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        本研究旨在探讨AI技术对学术公平的多维度影响，并提出构建更加包容和公正的学术生态系统的可能路径。
+                    </p>
+                </div>
+                
+                <div class="animate-slide-in-right">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img 
+                            src="https://picsum.photos/id/180/800/600" 
+                            alt="AI与学术研究" 
+                            class="w-full h-auto rounded-2xl"
+                            loading="lazy"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                            <div class="p-6 text-white">
+                                <p class="text-sm opacity-80">图1: 人工智能正在重塑学术研究的各个方面</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 挑战部分 -->
+    <section id="challenges" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-gradient bg-gradient-to-r from-primary to-secondary">
+                    AI时代的学术公平挑战
+                </h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 挑战卡片1 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover">
+                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-money text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">资源获取不平等</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        高质量AI工具通常需要付费订阅，这使得来自低收入国家或机构的研究者处于不利地位，加剧了全球学术研究的"数字鸿沟"。
+                    </p>
+                </div>
+                
+                <!-- 挑战卡片2 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-graduation-cap text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">技能与培训差距</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        不同地区和机构在AI教育和培训方面存在显著差异，导致研究者在利用AI工具提升研究效率方面的能力参差不齐。
+                    </p>
+                </div>
+                
+                <!-- 挑战卡片3 -->
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mb-6">
+                        <i class="fa fa-gavel text-accent text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">学术诚信问题</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        AI生成内容的泛滥使得剽窃和造假更加难以检测，传统的学术评价体系面临严峻挑战，可能导致不公平的学术竞争。
+                    </p>
+                </div>
+            </div>
+
+            <!-- 新增指定图片 -->
+            <div class="mt-12 text-center animate-slide-up">
+                <img 
+                    src="file:///C:/Users/陈荣锟/Desktop/123.jpg" 
+                    alt="AI学术公平挑战" 
+                    class="w-full max-w-2xl mx-auto rounded-2xl shadow-2xl"
+                    loading="lazy"
+                >
+                <p class="text-gray-600 mt-4 text-sm">
+                    图3: AI时代学术公平挑战的可视化分析
+                </p>
+            </div>
+            
+            <!-- 原有延伸思考部分 -->
+            <div class="mt-16 text-center animate-slide-up">
+                <h3 class="text-2xl font-bold mb-6 text-gradient bg-gradient-to-r from-primary to-secondary">
+                    延伸思考：人工智能的利与弊
+                </h3>
+                <div class="max-w-2xl mx-auto">
+                    <img 
+                        src="https://p3-flow-imagex-sign.byteimg.com/ocean-cloud-tos/2698091760919439392/35491e15d3d98218865d9557b9605349.jpeg~tplv-a9rns2rl98-image.png?rk3s=18ea6f23&x-expires=1750675612&x-signature=8V0JqF3j%2B9X%2F64aY27hQy%2FZJqM8%3D" 
+                        alt="人工智能的利与弊" 
+                        class="w-full h-auto rounded-2xl shadow-2xl"
+                        loading="lazy"
+                    >
+                    <p class="text-gray-600 mt-4 text-sm">
+                        图2: 人工智能技术具有双面性，既带来巨大发展机遇也引发诸多社会挑战
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据可视化部分 -->
+    <section id="data" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-gradient bg-gradient-to-r from-primary to-secondary">
+                    数据洞察
+                </h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+                    以下数据展示了全球范围内AI在学术研究中的使用情况及其对学术公平的影响
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- 图表1: 不同收入水平国家的AI工具使用率 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">不同收入水平国家的AI工具使用率</h3>
+                    <div class="h-80">
+                        <canvas id="usageChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- 图表2: 研究者对AI学术公平的看法 -->
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center">研究者对AI学术公平的看法</h3>
+                    <div class="h-80">
+                        <canvas id="opinionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 关键数据卡片 -->
+            <div class="grid md:grid-cols-4 gap-6 mt-12">
+                <div class="bg-primary/5 rounded-xl p-6 text-center">
+                    <p class="text-4xl font-bold text-primary mb-2">78%</p>
+                    <p class="text-gray-600">高收入国家研究者定期使用AI工具</p>
+                </div>
+                <div class="bg-secondary/5 rounded-xl p-6 text-center">
+                    <p class="text-4xl font-bold text-secondary mb-2">32%</p>
+                    <p class="text-gray-600">低收入国家研究者定期使用AI工具</p>
+                </div>
+                <div class="bg-accent/5 rounded-xl p-6 text-center">
+                    <p class="text-4xl font-bold text-accent mb-2">65%</p>
+                    <p class="text-gray-600">研究者认为AI加剧了学术不公平</p>
+                </div>
+                <div class="bg-dark/5 rounded-xl p-6 text-center">
+                    <p class="text-4xl font-bold text-dark mb-2">89%</p>
+                    <p class="text-gray-600">机构尚未制定明确的AI使用政策</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频部分 -->
+    <section class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4">
+                    视频讲解：AI与学术诚信
+                </h2>
+                <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
+                <p class="text-gray-300 mt-4 max-w-2xl mx-auto">
+                    观看这段视频，了解AI技术如何影响学术诚信以及我们应该如何应对这些挑战
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-black aspect-video">
+                    <!-- 替换为本地视频文件 -->
+                    <video controls class="w-full h-full object-cover">
+                        <source src="file:///C:/Users/陈荣锟/Desktop/111.mp4" type="video/mp4">
+                        您的浏览器不支持HTML5视频播放，请更新浏览器或检查视频格式。
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案部分 -->
+    <section id="solutions" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4 text-gradient bg-gradient-to-r from-primary to-secondary">
+                    构建公平的AI学术生态系统
+                </h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img 
+                        src="https://picsum.photos/id/48/800/600" 
+                        alt="AI学术公平解决方案" 
+                        class="w-full h-auto rounded-2xl shadow-xl"
+                        loading="lazy"
+                    >
+                </div>
+                
+                <div>
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                1
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">开放获取AI工具</h3>
+                                <p class="text-gray-600">
+                                    推动学术机构和科技公司为发展中国家的研究者提供免费或低成本的AI工具访问权限，缩小资源差距。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                2
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">全球AI教育计划</h3>
+                                <p class="text-gray-600">
+                                    建立全球性的AI教育和培训平台，为所有研究者提供平等的学习机会，提升他们使用AI工具的能力。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                3
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">透明的学术评价体系</h3>
+                                <p class="text-gray-600">
+                                    制定明确的AI使用规范和透明的学术评价标准，确保所有研究者在相同的规则下进行公平竞争。
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 w-12 h-12 bg-dark rounded-full flex items-center justify-center text-white font-bold mr-4">
+                                4
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-2">跨学科伦理研究</h3>
+                                <p class="text-gray-600">
+                                    鼓励计算机科学、伦理学、社会学等多学科交叉研究，共同探讨AI学术公平的伦理边界和政策框架。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 未来展望部分 -->
+    <section id="future" class="py-20 bg-gradient-to-br from-primary/90 to-secondary/90 text-white parallax" style="background-image: url('https://picsum.photos/id/1005/1920/1080');">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(2rem,4vw,3rem)] font-bold mb-4">
+                    未来展望
+                </h2>
+                <div class="w-24 h-1 bg-white mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-md rounded-2xl p-8 shadow-xl">
+                <p class="text-lg mb-6 leading-relaxed">
+                    展望未来，AI技术将继续深刻改变学术研究的面貌。我们的目标不是阻止AI在学术领域的应用，而是确保这种技术进步能够惠及所有研究者，而不是加剧现有的不平等。
+                </p>
+                <p class="text-lg mb-6 leading-relaxed">
+                    通过建立开放、包容、透明的AI学术生态系统，我们可以释放AI技术的巨大潜力，推动全球学术研究的进步，同时维护学术公平和诚信的核心价值。
+                </p>
+                <p class="text-lg leading-relaxed">
+                    这需要政府、学术机构、科技公司和研究者本人的共同努力。只有通过多方合作，我们才能确保AI成为促进学术公平的强大工具，而不是制造新的学术鸿沟。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 音频部分 (隐藏但可播放) -->
+    <audio id="background-audio" preload="auto">
+        <!-- 此处可添加您AI生成的音频文件链接 -->
+        <source src="" type="audio/mpeg">
+        您的浏览器不支持音频播放。
+    
+
+    <!-- 页脚（已删除指定文字） -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center space-x-2 mb-8">
+                    <i class="fa fa-balance-scale text-primary text-2xl"></i>
+                    <span class="font-bold text-xl">AI学术公平</span>
+                </div>
+                <div class="flex justify-center space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-twitter text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow');
+            }
+        });
+        
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 音频播放控制
+        document.getElementById('play-audio').addEventListener('click', function() {
+            const audio = document.getElementById('background-audio');
+            const button = document.getElementById('play-audio');
+            
+            if (audio.paused) {
+                audio.play();
+                button.innerHTML = '<i class="fa fa-pause mr-2"></i> 暂停介绍';
+            } else {
+                audio.pause();
+                button.innerHTML = '<i class="fa fa-play mr-2"></i> 语音介绍';
+            }
+        });
+        
+        // 图表1: 不同收入水平国家的AI工具使用率
+        const usageCtx = document.getElementById('usageChart').getContext('2d');
+        new Chart(usageCtx, {
+            type: 'bar',
+            data: {
+                labels: ['高收入国家', '中高收入国家', '中等收入国家', '低收入国家'],
+                datasets: [{
+                    label: '定期使用AI工具的研究者比例(%)',
+                    data: [78, 56, 41, 32],
+                    backgroundColor: [
+                        'rgba(30, 64, 175, 0.8)',
+                        'rgba(30, 64, 175, 0.6)',
+                        'rgba(30, 64, 175, 0.4)',
+                        'rgba(30, 64, 175, 0.2)'
+                    ],
+                    borderColor: 'rgba(30, 64, 175, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+        
+        // 图表2: 研究者对AI学术公平的看法
+        const opinionCtx = document.getElementById('opinionChart').getContext('2d');
+        new Chart(opinionCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['加剧了不公平', '没有明显影响', '促进了公平'],
+                datasets: [{
+                    data: [65, 22, 13],
+                    backgroundColor: [
+                        'rgba(124, 58, 237, 0.8)',
+                        'rgba(124, 58, 237, 0.4)',
+                        'rgba(5, 150, 105, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+        
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // 观察所有需要动画的元素
+        document.querySelectorAll('.card-hover, .animate-slide-in-left, .animate-slide-in-right, .animate-slide-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
